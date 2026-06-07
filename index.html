@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجتمع أُنس - إيمان جمعة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* لوحة الألوان الاحترافية المحدثة باللون الوردي والأزرق */
+            --accent-pink: #E056A0;      /* اللون الوردي المطلوب 🌸 */
+            --accent-pink-hover: #c9438c;
+            --brand-maroon: #70142a;     /* العنابي الفخم */
+            --brand-blue: #436075;       /* الأزرق البترولي */
+            
+            --bg-gradient: linear-gradient(135deg, #f7ece8 0%, #fae3e8 50%, #e8f0f5 100%);
+            --card-bg: rgba(255, 255, 255, 0.25); 
+            --glass-modal: rgba(255, 255, 255, 0.6);
+            --border-soft: rgba(224, 86, 160, 0.2); 
+            
+            --text-dark: #3a2227;
+            --text-muted: #614a4e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.8;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* -----------------------------------------
+           الـ Navbar الاحترافي والزجاجي
+        ----------------------------------------- */
+        .navbar {
+            background-color: rgba(247, 236, 232, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-soft);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(224, 86, 160, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 25px;
+            flex: 1;
+            align-items: center;
+        }
+
+        .nav-group.right { justify-content: flex-start; }
+        .nav-group.left { justify-content: flex-end; }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover { color: var(--accent-pink); }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-pink);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after { width: 100%; }
+
+        /* زر الأوراد اليومية */
+        .btn-wards {
+            background-color: var(--accent-pink);
+            color: white;
+            padding: 10px 22px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(224, 86, 160, 0.3);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-wards:hover {
+            background-color: var(--accent-pink-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 86, 160, 0.45);
+        }
+
+        /* شعار أُنس */
+        .nav-logo {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-maroon);
+            text-decoration: none;
+            line-height: 1;
+            display: block;
+        }
+        
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--accent-pink);
+            display: block;
+            margin-top: 4px;
+            white-space: nowrap;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* -----------------------------------------
+           النافذة المنبثقة الزجاجية للأوراد
+        ----------------------------------------- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(58, 34, 39, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .modal-window {
+            background: var(--glass-modal);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            padding: 30px 25px;
+            position: relative;
+            animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-maroon);
+            transition: all 0.2s;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .close-modal:hover {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        .modal-title {
+            text-align: center;
+            color: var(--brand-maroon);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            margin-top: 15px;
+            font-weight: 700;
+            padding: 0 20px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .day-card {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 14px 10px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--brand-maroon);
+            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            user-select: none;
+        }
+
+        .day-card:hover, .day-card.active {
+            background: var(--accent-pink);
+            color: white;
+            border-color: var(--accent-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(224, 86, 160, 0.3);
+        }
+
+        .day-content-box {
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 16px;
+            padding: 25px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .day-content-title {
+            font-size: 1.3rem;
+            color: var(--brand-maroon);
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-soft);
+            padding-bottom: 8px;
+        }
+
+        .task-link-item {
+            display: block;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border-right: 5px solid var(--accent-pink);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+        }
+
+        a.task-link-item:hover {
+            transform: translateX(-4px);
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .task-link-item h5 { font-size: 1.05rem; color: var(--brand-maroon); margin-bottom: 6px; }
+        .task-link-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        .channel-badge { border-right-color: var(--brand-blue); background: rgba(67, 96, 117, 0.05); }
+
+        /* ستايل مخصص ومميز لفورم المحاسبة اليومية */
+        .form-accounting-box {
+            background: linear-gradient(135deg, rgba(224, 86, 160, 0.12) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border: 1px dashed var(--accent-pink);
+            padding: 22px 15px;
+            border-radius: 16px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .form-accounting-box h6 {
+            font-size: 1.15rem;
+            color: var(--brand-maroon);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .form-accounting-box p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        .btn-form {
+            display: inline-block;
+            background-color: var(--brand-blue);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(67, 96, 117, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-form:hover {
+            background-color: #334a5c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(67, 96, 117, 0.35);
+        }
+
+        /* -----------------------------------------
+           باقي السكاشن الأساسية للموقع
+        ----------------------------------------- */
+        .hero { text-align: center; padding: 70px 20px 45px; }
+        .hero h1 { font-size: 2.8rem; color: var(--brand-maroon); margin-bottom: 20px; font-weight: 700; line-height: 1.4;}
+        .hero p { font-size: 1.25rem; color: var(--brand-blue); max-width: 650px; margin: 0 auto 35px; font-weight: 500; }
+        
+        .btn-main {
+            display: inline-block; padding: 14px 40px; background-color: var(--accent-pink); color: #fff;
+            text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(224, 86, 160, 0.25); transition: all 0.3s ease;
+        }
+        .btn-main:hover { transform: translateY(-3px); background-color: var(--accent-pink-hover); }
+
+        .founder { padding: 30px 0; margin-bottom: 20px; }
+        .founder-box {
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6); border-right: 6px solid var(--accent-pink);
+            border-radius: 24px; padding: 45px 35px; max-width: 900px; margin: 0 auto; box-shadow: 0 15px 35px rgba(112, 20, 42, 0.04);
+        }
+        .founder-box h2 { color: var(--brand-maroon); font-size: 2rem; margin-bottom: 20px; text-align: center;}
+        .founder-box p { font-size: 1.15rem; text-align: justify; text-align-last: center; margin-bottom: 20px; }
+
+        .intro-lecture {
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 24px;
+            padding: 40px 30px; margin: 20px auto 50px; max-width: 900px; text-align: center; box-shadow: 0 15px 35px rgba(112, 20, 42, 0.04);
+        }
+        .intro-lecture h3 { color: var(--brand-maroon); margin-bottom: 15px; font-size: 1.4rem; }
+        .intro-lecture p { margin-bottom: 20px; }
+        .btn-secondary {
+            display: inline-block; padding: 11px 30px; color: var(--accent-pink); border: 2px solid var(--accent-pink);
+            text-decoration: none; border-radius: 50px; font-weight: 700; background-color: rgba(255, 255, 255, 0.4); transition: all 0.3s;
+        }
+        .btn-secondary:hover { background-color: var(--accent-pink); color: #fff; }
+
+        .tasks { padding: 30px 0 50px; }
+        .tasks-title { text-align: center; color: var(--brand-maroon); margin-bottom: 40px; font-size: 2.1rem; font-weight: 700; }
+        .tasks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .task-card {
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 35px 25px; border-radius: 20px; border-top: 4px solid var(--accent-pink);
+            border-left: 1px solid rgba(255, 255, 255, 0.5); border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(112, 20, 42, 0.02);
+        }
+        .task-card h4 { color: var(--brand-maroon); margin-bottom: 12px; font-size: 1.25rem; }
+
+        /* -----------------------------------------
+           الـ Footer عالي الاحترافية والزجاجي
+        ----------------------------------------- */
+        .site-footer {
+            background: rgba(247, 236, 232, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-soft);
+            padding: 50px 0 20px;
+            margin-top: 70px;
+            box-shadow: 0 -10px 30px rgba(224, 86, 160, 0.03);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 35px;
+        }
+
+        .footer-brand h4 {
+            font-size: 1.8rem;
+            color: var(--brand-maroon);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 450px;
+            text-align: justify;
+        }
+
+        .footer-links h5 {
+            font-size: 1.2rem;
+            color: var(--brand-maroon);
+            margin-bottom: 18px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 35px;
+            height: 2px;
+            background-color: var(--accent-pink);
+        }
+
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 12px; }
+        .footer-links ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.25s ease;
+            display: inline-block;
+        }
+        .footer-links ul li a:hover {
+            color: var(--accent-pink);
+            transform: translateX(-5px);
+        }
+
+        .social-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .social-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px;
+            background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 14px; text-decoration: none; color: var(--text-dark); font-weight: 700;
+            font-size: 0.9rem; transition: all 0.3s ease;
+        }
+
+        .social-btn.telegram:hover {
+            background: #26A5E4; color: white; border-color: #26A5E4;
+            box-shadow: 0 5px 15px rgba(38, 165, 228, 0.3); transform: translateY(-3px);
+        }
+        .social-btn.youtube:hover {
+            background: #FF0000; color: white; border-color: #FF0000;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3); transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center; border-top: 1px dashed rgba(224, 86, 160, 0.2);
+            padding-top: 20px; color: var(--text-muted); font-size: 0.9rem;
+        }
+        .footer-bottom strong { color: var(--brand-maroon); }
+
+        /* -----------------------------------------
+           التوافق التام مع الموبايل (Responsive UI)
+        ----------------------------------------- */
+        @media (max-width: 991px) {
+            .footer-grid {
+                grid-template-columns: 1.2fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            
+            /* تعديل الـ Navbar بالكامل ليتناسب مع يد مستخدم الهاتف دون تداخل */
+            .nav-container { 
+                flex-direction: column; 
+                gap: 15px; 
+                padding: 8px 10px; 
+            }
+            .nav-logo { order: 1; padding: 0; }
+            .logo-text { font-size: 2.2rem; }
+            
+            .nav-group { 
+                order: 2;
+                width: 100%;
+                justify-content: center !important; 
+                gap: 15px; 
+                flex-wrap: wrap;
+            }
+            .nav-group.left { order: 3; margin-top: -5px; }
+            .nav-item { font-size: 0.95rem; padding: 4px 0; }
+            .btn-wards { padding: 8px 18px; font-size: 0.9rem; }
+
+            /* سكشن الهيرو */
+            .hero { padding: 50px 10px 35px; }
+            .hero h1 { font-size: 1.9rem; line-height: 1.4; }
+            .hero p { font-size: 1.1rem; margin-bottom: 25px; }
+            .btn-main { padding: 12px 30px; font-size: 1rem; width: 100%; max-width: 320px; text-align: center; }
+
+            /* سكشن التعريف للمؤسسة */
+            .founder-box { padding: 35px 20px; border-radius: 20px; }
+            .founder-box h2 { font-size: 1.6rem; }
+            .founder-box p { font-size: 1.05rem; text-align: justify; }
+
+            /* المودال الخاص بالأوراد اليومية */
+            .modal-window { padding: 25px 15px; border-radius: 20px; }
+            .modal-title { font-size: 1.35rem; margin-bottom: 20px; }
+            .days-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .day-card { font-size: 0.85rem; padding: 12px 6px; border-radius: 12px; }
+            .day-content-box { padding: 18px 12px; }
+            .day-content-title { font-size: 1.15rem; }
+            .task-link-item { padding: 14px 12px; border-radius: 12px; }
+            .task-link-item h5 { font-size: 1rem; }
+            .task-link-item p { font-size: 0.85rem; }
+
+            /* المهام اليومية */
+            .tasks-title { font-size: 1.7rem; margin-bottom: 30px; }
+            .task-card { padding: 25px 20px; border-radius: 16px; }
+
+            /* الفوتر */
+            .site-footer { padding: 40px 0 20px; margin-top: 50px; }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            .footer-brand p { margin: 0 auto; font-size: 1rem; }
+            .footer-links h5::after { right: 50%; transform: translateX(50%); }
+            .social-buttons { justify-content: center; }
+            .social-btn { width: 100%; max-width: 280px; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            /* تعديل شبكة الأيام لتصبح عمودين لتكون مريحة جداً وسهلة اللمس */
+            .days-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-group right">
+                <a href="#about" class="nav-item">صاحبة المجتمع</a>
+                <a href="#tasks" class="nav-item">مهام الرحلة</a>
+                <button class="btn-wards" id="openWardsBtn">✨ الورد اليومي</button>
+            </div>
+            
+            <div class="nav-logo">
+                <a href="#" class="logo-text">أُنْـس</a>
+                <span class="logo-sub">صُحْبَةٌ تَقُرُّبِكِ إِلَى اللَّه 🌸</span>
+            </div>
+            
+            <div class="nav-group left">
+                <a href="https://t.me/+D-jba4cjRIw5NDk0" target="_blank" class="nav-item">المحاضرة التمهيدية</a>
+                <a href="https://t.me/+D-jba4cjRIw5NDk0" target="_blank" class="nav-item">انضمي إلينا</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal-overlay" id="wardsModal">
+        <div class="modal-window">
+            <button class="close-modal" id="closeWardsBtn">✕</button>
+            <h3 class="modal-title">🌸 جدول الأيام والأوراد بالترتيب</h3>
+            
+            <div class="days-grid">
+                <div class="day-card active" onclick="showDay(1)">اليوم الأول ✨</div>
+                <div class="day-card" onclick="showDay(2)">اليوم الثاني</div>
+                <div class="day-card" onclick="showDay(3)">اليوم الثالث</div>
+                <div class="day-card" onclick="showDay(4)">اليوم الرابع</div>
+                <div class="day-card" onclick="showDay(5)">اليوم الخامس</div>
+                <div class="day-card" onclick="showDay(6)">اليوم السادس</div>
+                <div class="day-card" onclick="showDay(7)">اليوم السابع</div>
+            </div>
+
+            <div class="day-content-box" id="dayContentBox"></div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1>30 يوم نحاول فيهم نرجع لربنا بهدوء.. بأُنس 💙</h1>
+            <p>من غير ضغط، لكن بأُنس.. رحلة دافئة لقلبكِ مع صحبة صالحة تشبهكِ وتشدُّ على يدكِ.</p>
+            <a href="https://t.me/+D-jba4cjRIw5NDk0" class="btn-main" target="_blank">انضمي لعائلتنا في أُنس 🌸</a>
+        </div>
+    </section>
+
+    <section class="founder" id="about">
+        <div class="container">
+            <div class="founder-box">
+                <h2>السلام عليكم ورحمة الله وبركاته 🌸</h2>
+                <p>أنا <strong>إيمان جمعة</strong>، خريجة كلية الآداب، معلمة قرآن وكاتبة محتوى وفي طريقي أكون معالجة نفسية بإذن الله. 💙</p>
+                <p>مؤمنة بفكرة الصحبة الصالحة وإنها سبب كبير في صلاح الإنسان مهما كان حاسس بالوحدة وإن مفيش ناس حواليه شبهه وبتشجعه، خصوصًا احنا كبنات أغلبنا مش بينزل كتير ويتعامل مع الناس. عشان كدا عملت <strong>مجتمع أُنس</strong>.. اللي فعلًا هتحسي فيه بالأُنس مع بنات شبهك وعندهم نفس أهدافك وهنوصل مع بعض بإذن الله. 🥰</p>
+                <p>كل ما تحسي إنك زهقانة أو عندك مشكلة تأكدي إن هتلاقي هنا الراحة النفسية وهتفصلي عن أي حاجة مضايقاكي. 🌸</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="intro-lecture">
+            <h3>🌸 خطوتنا الأولى قبل البداية</h3>
+            <p>اسمعوا محاضرة <strong>"عرفت ربي"</strong> لمعلمتي أم عبيدة نفع الله بها، متأكدة إنها هتفرق معاكم جدًا في تهيئة قلوبكم للرحلة.</p>
+            <a href="https://t.me/+D-jba4cjRIw5NDk0" class="btn-secondary" target="_blank">سماع المحاضرة عبر تليجرام</a>
+        </div>
+    </div>
+
+    <section class="tasks" id="tasks">
+        <div class="container">
+            <h2 class="tasks-title">🌿 مهام التحدي اليومية الثابتة</h2>
+            <div class="tasks-grid">
+                <div class="task-card">
+                    <h4>1️⃣ كيف تتلذذ بالصلاة</h4>
+                    <p>فيديو يوميًا من سلسلة الشيخ مشاري الخراز، نأخذ منه خطوة عملية لندخل الصلاة بقلوب حاضرة خاشعة.</p>
+                </div>
+                <div class="task-card">
+                    <h4>2️⃣ مفاتيح السكينة</h4>
+                    <p>نصف ساعة يوميًا لتدبر وفهم الأذكار، لكي لا تكون مجرد كلمات نرددها، بل طمأنينة تسكن أرواحنا.</p>
+                </div>
+                <div class="task-card">
+                    <h4>3️⃣ الورد القرآني</h4>
+                    <p>قراءة أو سماع صفحة واحدة من القرآن يوميًا.. حبل متصل لا ينقطع مع كلام الله تبارك وتعالى.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-brand">
+                    <h4>أُنْـس 🌸</h4>
+                    <p>مجتمع دافئ وصحبة صالحة تجمعنا على طاعة الله وتقربنا إليه، نسير معاً بخطوات ثابتة وقلوب مطمئنة طوال 30 يوماً لنصنع التغيير الحقيقي بأُنس وراحة نفسية.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h5>روابط سريعة</h5>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#about">صاحبة المجتمع</a></li>
+                        <li><a href="#tasks">مهام الرحلة</a></li>
+                        <li><a href="javascript:void(0)" onclick="document.getElementById('openWardsBtn').click();">جدول الأوراد اليومية</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h5>تابعونا وتواصلوا معنا</h5>
+                    <div class="social-buttons">
+                        <a href="https://t.me/+D-jba4cjRIw5NDk0" target="_blank" class="social-btn telegram">
+                            <span>✈️</span> تليجرام أُنس
+                        </a>
+                        <a href="https://t.me/+SPn2oDqBi5ZkODc8" target="_blank" class="social-btn telegram">
+                            <span>🌿</span> مفاتيح السكينة
+                        </a>
+                        <a href="https://youtu.be/5IK8LpEHhbc?si=u0VVAo7Z_fPX5pKz" target="_blank" class="social-btn youtube">
+                            <span>🎥</span> يوتيوب التحدي
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © ٢٠٢٦ لمجتمع <strong>أُنس</strong> | صنع بكل حب لدعم الصحبة الصالحة 🌸</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('wardsModal');
+        const openBtn = document.getElementById('openWardsBtn');
+        const closeBtn = document.getElementById('closeWardsBtn');
+        const contentBox = document.getElementById('dayContentBox');
+
+        openBtn.onclick = () => {
+            modal.style.display = 'flex';
+            showDay(1); // فتح اليوم الأول تلقائياً عند فتح المودال
+        }
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; }
+
+        // تم تعبئة البيانات بالكامل للأيام وإصلاح وإغلاق النص المقطوع لليوم السادس بشكل سليم
+        const daysData = {
+            1: `
+                <h4 class="day-content-title">ورْد اليوم الأول ✨</h4>
+                <a href="https://youtu.be/5IK8LpEHhbc?si=u0VVAo7Z_fPX5pKz" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة الأولى من سلسلة الشيخ مشاري الخراز على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/531" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>نصف ساعة من أول محاضرة في مفاتيح السكينة لتدبر وفهم الأذكار.</p>
+                </a>
+                <a href="https://t.me/+SPn2oDqBi5ZkODc8" target="_blank" class="task-link-item channel-badge">
+                    <h5>❤️ رابط قناة مفاتيح السكينة الرسمية</h5>
+                    <p>اضغطي هنا للانضمام المباشر لمتابعة كافة التحديثات اليومية.</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>أول صفحة من سورة البقرة؛ من الفاتحة لوجه "إن الذين كفروا" (يمكن قراءتها أو سماعها).</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم الأول</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `,
+            2: `
+                <h4 class="day-content-title">ورْد اليوم الثاني 🌿</h4>
+                <a href="https://youtu.be/zey8O9FzM88?si=M3SdbT2TUKOMYFxB" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة الثانية من الدورة على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/531" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>ثاني نصف ساعة من محاضرة مفاتيح السكينة لتعميق تدبر الأذكار.</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>قراءة أو سماع صفحة 2 من القرآن الكريم.</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم الثاني</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `,
+            3: `
+                <h4 class="day-content-title">ورْد اليوم الثالث 🌸</h4>
+                <a href="https://youtu.be/3JiYl1h1Tvg?si=VAd89fvUi4s33Q_p" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة الثالثة من الدورة على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/531" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>ثالث ربع ساعة من محاضرة مفاتيح السكينة.</p>
+                </a>
+                <a href="https://t.me/+SPn2oDqBi5ZkODc8" target="_blank" class="task-link-item channel-badge">
+                    <h5>❤️ رابط قناة مفاتيح السكينة (تذكير بالانضمام)</h5>
+                    <p>تأكدي من دخول رابط القناة أولاً لمتابعة الصوتيات والدروس.</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>قراءة أو سماع صفحة 3 من القرآن الكريم.</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم الثالث</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `,
+            4: `
+                <h4 class="day-content-title">ورْد اليوم الرابع 💙</h4>
+                <a href="https://youtu.be/k2-BUtUh1sg?si=BfhTMOLtZzJFPB9Z" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة الرابعة من الدورة على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/532" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>أول نصف ساعة من محاضرة مفاتيح السكينة 2 (الجزء الأول).</p>
+                </a>
+                <a href="https://t.me/+SPn2oDqBi5ZkODc8" target="_blank" class="task-link-item channel-badge">
+                    <h5>❤️ رابط قناة مفاتيح السكينة الرسمية</h5>
+                    <p>اضغطي هنا للانضمام المباشر لمتابعة كافة التحديثات اليومية.</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>قراءة أو سماع صفحة 4 من القرآن الكريم.</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم الرابع</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `,
+            5: `
+                <h4 class="day-content-title">ورْد اليوم الخامس ✨</h4>
+                <a href="https://youtu.be/H5U5hsIJF1E?si=U2wutoG5K5IIc82L" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة الخامسة من الدورة على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/532" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>ثاني نصف ساعة من محاضرة 2 (الجزء الأول).</p>
+                </a>
+                <a href="https://t.me/+SPn2oDqBi5ZkODc8" target="_blank" class="task-link-item channel-badge">
+                    <h5>❤️ رابط قناة مفاتيح السكينة الرسمية</h5>
+                    <p>اضغطي هنا للانضمام المباشر لمتابعة كافة التحديثات اليومية.</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>قراءة أو سماع صفحة 5 من القرآن الكريم.</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم الخامس</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `,
+            6: `
+                <h4 class="day-content-title">ورْد اليوم السادس 🌿</h4>
+                <a href="https://youtu.be/EhYhE78iQAk?si=1U_1G_Ekt1jn493W" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة السادسة من الدورة على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/533" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>أول نصف ساعة من محاضرة مفاتيح السكينة 2 (الجزء الثاني).</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>قراءة أو سماع صفحة 6 من القرآن الكريم.</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم السادس</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `,
+            7: `
+                <h4 class="day-content-title">ورْد اليوم السابع ✨</h4>
+                <a href="https://youtu.be/EhYhE78iQAk?si=1U_1G_Ekt1jn493W" target="_blank" class="task-link-item">
+                    <h5>1️⃣ كيف تتلذذ بالصلاة 🌸</h5>
+                    <p>اضغطي هنا لمشاهدة الحلقة السابعة من الدورة على يوتيوب.</p>
+                </a>
+                <a href="https://t.me/Mfatee7Alsakena/533" target="_blank" class="task-link-item">
+                    <h5>2️⃣ محاضرات مفاتيح السكينة 🌿</h5>
+                    <p>تكملة المحاضرة الثانية من سلسلة مفاتيح السكينة لتعميق السكينة والتدبر.</p>
+                </a>
+                <div class="task-link-item" style="cursor: default;">
+                    <h5>3️⃣ الورد القرآني المرتل 💙</h5>
+                    <p>قراءة أو سماع صفحة 7 من القرآن الكريم.</p>
+                </div>
+                <div class="form-accounting-box">
+                    <h6>📝 فورم المحاسبة اليومي لليوم السابع</h6>
+                    <p>لا تنسي تسجيل إنجازكِ اليوم لتشجيع نفسكِ ومتابعة استمراريتكِ في الرحلة!</p>
+                    <a href="https://forms.gle/2ms9a3Mvvzw53Ypq7" target="_blank" class="btn-form">تعبئة فورم المحاسبة 🌸</a>
+                </div>
+            `
+        };
+
+        function showDay(dayNumber) {
+            contentBox.innerHTML = daysData[dayNumber];
+            
+            // تحديث حالة البطاقة النشطة (Active)
+            const cards = document.querySelectorAll('.day-card');
+            cards.forEach((card, index) => {
+                if (index === (dayNumber - 1)) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
