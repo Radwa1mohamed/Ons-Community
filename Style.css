@@ -1,0 +1,1313 @@
+:root {
+    /* لوحة الألوان الاحترافية المحدثة باللون الوردي والأزرق */
+    --accent-pink: #E056A0;
+    /* اللون الوردي المطلوب 🌸 */
+    --accent-pink-hover: #c9438c;
+    --brand-maroon: #70142a;
+    /* العنابي الفخم */
+    --brand-blue: #436075;
+    /* الأزرق البترولي */
+    --brand-light-blue: #B9CDE3;
+    /* الأزرق السماوي الخاص بالبراندنج الجديد 🌟 */
+
+    /* [تعديل اللمعة والتدريج] جعل التدرج انسيابي ومترابط وممتد بالخلفية لخدمة التأثير الزجاجي */
+    --bg-gradient: linear-gradient(135deg, #fbf5f3 0%, #fcecf0 35%, var(--brand-light-blue) 70%, #f0f4f8 100%);
+    
+    /* [تعديل المظهر الزجاجي] كروت زجاجية فائقة النعومة مع لمعة مصقولة متناغمة */
+    --card-bg: rgba(255, 255, 255, 0.18);
+    --glass-modal: rgba(255, 255, 255, 0.45);
+    
+    /* [تعديل الحواف والحدود] جعل الحدود بيضاء شفافة لتعكس ضوء حواف الزجاج الحقيقي */
+    --border-soft: rgba(255, 255, 255, 0.6);
+
+    --text-dark: #3a2227;
+    --text-muted: #614a4e;
+    
+    /* [إضافة الخبير] سر اللمعة الرائعة والتشبع الضوئي خلف قطع الزجاج */
+    --glass-blur: blur(25px) saturate(140%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    line-height: 1.8;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* -----------------------------------------
+        الـ Navbar الاحترافي والزجاجي
+    ----------------------------------------- */
+.navbar {
+    /* [تعديل] دمج الألوان الزجاجية واللمعة والضبابية الفائقة */
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-soft);
+    padding: 12px 0;
+    box-shadow: 0 8px 32px 0 rgba(112, 20, 42, 0.03);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-group {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-group.right {
+    justify-content: flex-start;
+}
+
+.nav-group.left {
+    justify-content: flex-end;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+    white-space: nowrap;
+}
+
+.nav-item:hover {
+    color: var(--accent-pink);
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    right: 0;
+    background-color: var(--brand-light-blue); /* لمسة البراندنج عند التمرير بالماوس */
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+/* زر الأوراد اليومية */
+.btn-wards {
+    background-color: var(--accent-pink);
+    color: white;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Tajawal', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(224, 86, 160, 0.3);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-wards:hover {
+    background-color: var(--accent-pink-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(224, 86, 160, 0.45);
+}
+
+/* شعار أُنس */
+.nav-logo {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brand-maroon);
+    text-decoration: none;
+    line-height: 1;
+    display: block;
+}
+
+.logo-sub {
+    font-size: 0.75rem;
+    color: var(--accent-pink);
+    display: block;
+    margin-top: 4px;
+    white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* زر البرجر للموبايل */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--brand-maroon);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* -----------------------------------------
+        النافذة المنبثقة الزجاجية للأوراد
+    ----------------------------------------- */
+
+/* تنسيق قسم الـ Hero الاحترافي المطور */
+.hero {
+    padding: 60px 0 40px;
+}
+
+/* تقسيم السكشن إلى عمودين متساويين للكمبيوتر */
+.hero-wrapper {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-content {
+    text-align: right;
+}
+
+.hero h1 {
+    font-size: 2.6rem;
+    color: var(--brand-maroon);
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--brand-blue);
+    margin-bottom: 35px;
+    font-weight: 500;
+    max-width: 580px;
+}
+
+/* تأثير الإطار الزجاجي حول الصورة */
+.hero-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image-card {
+    /* [تعديل لمزيد من اللمعان والشفافية] */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-soft);
+    padding: 12px;
+    border-radius: 32px;
+    /* حواف دائرية ناعمة جداً الفخمة */
+    box-shadow: 0 20px 40px rgba(112, 20, 42, 0.04);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* تأثير تفاعلي خفيف عند تمرير الماوس فوق الصورة */
+.hero-image-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.hero-img {
+    width: 100%;
+    max-width: 400px;
+    /* حجم مثالي للصورة لتظل بجودة ممتازة */
+    height: auto;
+    display: block;
+    border-radius: 22px;
+    /* انحناء داخلي متناسق مع الإطار */
+    object-fit: cover;
+}
+
+/* التوافق مع شاشات الموبايل والتابلت */
+@media (max-width: 991px) {
+    .hero {
+        padding: 40px 0 20px;
+    }
+
+    .hero-wrapper {
+        grid-template-columns: 1fr;
+        /* تحويل الأعمدة لعمود واحد أسفل بعض */
+        gap: 35px;
+        text-align: center;
+    }
+
+    .hero-content {
+        text-align: center;
+        order: 2;
+        /* النيكست يظهر أسفل الصورة في الموبايل */
+    }
+
+    .hero-image-container {
+        order: 1;
+        /* الصورة تظهر فوق أولاً لشد الانتباه في الموبايل */
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+        margin: 0 auto 25px;
+    }
+
+    .hero-img {
+        max-width: 320px;
+        /* حجم أصغر متناسق مع شاشات الموبايل */
+    }
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(58, 34, 39, 0.35);
+    /* [تعديل] تعميق تأثير الضبابية خلف النافذة المفتوحة */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.modal-window {
+    background: var(--glass-modal);
+    /* [تعديل زجاجي] إضافة ضبابية عالية جداً للمودال وحدود عاكسة ناعمة */
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--border-soft);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 850px;
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+    padding: 30px 25px;
+    position: relative;
+    animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-maroon);
+    transition: all 0.2s;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.close-modal:hover {
+    background: var(--accent-pink);
+    color: white;
+}
+
+.modal-title {
+    text-align: center;
+    color: var(--brand-maroon);
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    font-weight: 700;
+    padding: 0 20px;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.day-card {
+    /* [تعديل اللمعة] تحويل كروت الأيام لتصبح زجاجية شفافة وتأخذ من تدريج الخلفية الساحر */
+    background: rgba(255, 255, 255, 0.25); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-soft);
+    padding: 14px 10px;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--brand-maroon);
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.day-card:hover,
+.day-card.active {
+    background: var(--accent-pink);
+    color: white;
+    border-color: var(--accent-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(224, 86, 160, 0.25);
+}
+
+.day-content-box {
+    /* [تعديل زجاجي] جعل صندوق المحتوى يبرز بلمعة وضبابية متزنة */
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px 20px;
+    border: 1px solid var(--border-soft);
+}
+
+.day-content-title {
+    font-size: 1.3rem;
+    color: var(--brand-maroon);
+    margin-bottom: 15px;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(224, 86, 160, 0.15);
+    padding-bottom: 8px;
+}
+
+.task-link-item {
+    display: block;
+    /* [تعديل زجاجي] روابط زجاجية انسيابية مدمجة مع التصميم */
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text-dark);
+    border-right: 5px solid var(--accent-pink);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+}
+
+a.task-link-item:hover {
+    transform: translateX(-4px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.task-link-item h5 {
+    font-size: 1.05rem;
+    color: var(--brand-maroon);
+    margin-bottom: 6px;
+}
+
+.task-link-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* -----------------------------------------
+        باقي السكاشن الأساسية للموقع
+    ----------------------------------------- */
+.hero {
+    text-align: center;
+    padding: 70px 20px 45px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: var(--brand-maroon);
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--brand-blue);
+    max-width: 650px;
+    margin: 0 auto 35px;
+    font-weight: 500;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 14px 40px;
+    background-color: var(--accent-pink);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(224, 86, 160, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-main:hover {
+    transform: translateY(-3px);
+    background-color: var(--accent-pink-hover);
+}
+
+.founder {
+    padding: 30px 0;
+    margin-bottom: 20px;
+}
+
+.founder-box {
+    background: var(--card-bg);
+    /* [تعديل اللمعة] جعل سكشن التعريف فخم ويشع زجاجياً وضبابياً بالخلفية الجديدة */
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-soft);
+    border-right: 6px solid var(--accent-pink);
+    border-radius: 24px;
+    padding: 45px 35px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 15px 35px rgba(112, 20, 42, 0.02);
+}
+
+.founder-box h2 {
+    color: var(--brand-maroon);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.founder-box p {
+    font-size: 1.15rem;
+    text-align: justify;
+    text-align-last: center;
+    margin-bottom: 20px;
+}
+
+.intro-lecture {
+    background: var(--card-bg);
+    /* [تعديل زجاجي للمعة] */
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-soft);
+    border-radius: 24px;
+    padding: 40px 30px;
+    margin: 20px auto 50px;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(112, 20, 42, 0.02);
+}
+
+.intro-lecture h3 {
+    color: var(--brand-maroon);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.intro-lecture p {
+    margin-bottom: 20px;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 11px 30px;
+    color: var(--accent-pink);
+    border: 2px solid var(--accent-pink);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-pink);
+    color: #fff;
+}
+
+.tasks {
+    padding: 30px 0 50px;
+}
+
+.tasks-title {
+    text-align: center;
+    color: var(--brand-maroon);
+    margin-bottom: 40px;
+    font-size: 2.1rem;
+    font-weight: 700;
+}
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.task-card {
+    background: var(--card-bg);
+    /* [تعديل اللمعة] لتتماشى الكروت كلها مع المظهر المصقول */
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    padding: 35px 25px;
+    border-radius: 20px;
+    border-top: 4px solid var(--accent-pink);
+    border-left: 1px solid var(--border-soft);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(112, 20, 42, 0.01);
+}
+
+.task-card h4 {
+    color: var(--brand-maroon);
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+}
+
+/* -----------------------------------------
+        الـ Footer عالي الاحترافية والزجاجي
+    ----------------------------------------- */
+.site-footer {
+    /* [تعديل اللمعة والزجاج] جعل الفوتر مبهر كقطعة زجاجية واحدة تتداخل مع تدريج الصفحة */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-top: 1px solid var(--border-soft);
+    padding: 50px 0 20px;
+    margin-top: 70px;
+    box-shadow: 0 -10px 30px rgba(112, 20, 42, 0.02);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 35px;
+}
+
+.footer-brand h4 {
+    font-size: 1.8rem;
+    color: var(--brand-maroon);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.footer-brand p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 450px;
+    text-align: justify;
+}
+
+.footer-links h5 {
+    font-size: 1.2rem;
+    color: var(--brand-maroon);
+    margin-bottom: 18px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.footer-links h5::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35px;
+    height: 2px;
+    background-color: var(--accent-pink);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.25s ease;
+    display: inline-block;
+}
+
+.footer-links ul li a:hover {
+    color: var(--accent-pink);
+    transform: translateX(-5px);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    /* [تعديل زجاجي] أزرار تواصل زجاجية شفافة ولامعة */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.social-btn.telegram:hover {
+    background: #26A5E4;
+    color: white;
+    border-color: #26A5E4;
+    box-shadow: 0 5px 15px rgba(38, 165, 228, 0.3);
+    transform: translateY(-3px);
+}
+
+.social-btn.youtube:hover {
+    background: #FF0000;
+    color: white;
+    border-color: #FF0000;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px dashed rgba(224, 86, 160, 0.15);
+    padding-top: 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-bottom strong {
+    color: var(--brand-maroon);
+}
+
+/* -----------------------------------------
+        التوافق التام مع الموبايل (Responsive UI)
+    ----------------------------------------- */
+@media (max-width: 991px) {
+    .footer-grid {
+        grid-template-columns: 1.2fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    /* 1. زيادة طول وتوسيع الـ Navbar في الموبايل */
+    .navbar {
+        padding: 20px 0;
+        /* تم زيادة الطول هنا ليعطي طابعاً فخماً ومريحاً */
+    }
+
+    .nav-container {
+        padding: 5px 15px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* 2. عكس الأماكن: جعل زر البرجر (القائمة) يظهر في أقصى اليسار */
+    .menu-toggle {
+        display: flex;
+        order: 2;
+        /* لنقله إلى اليسار تماماً */
+    }
+
+    /* 3. عكس الأماكن: جعل اللوجو يظهر في أقصى اليمين */
+    .nav-logo {
+        order: 1;
+        /* لنقله إلى اليمين تماماً */
+        padding: 0;
+        text-align: right;
+    }
+
+    .logo-text {
+        font-size: 2rem;
+    }
+
+    /* القائمة المنسدلة الزجاجية للموبايل */
+    .nav-group.right {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        /* [تعديل زجاجي] بقاء الشفافية القوية والضبابية حتى مع القائمة المنسدلة بالموبايل */
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        flex-direction: column;
+        padding: 30px 25px;
+        gap: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid var(--border-soft);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        max-height: 80vh;
+        overflow-y: auto;
+        z-index: 999;
+    }
+
+    .nav-group.right.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        margin-top: 15px;
+        /* مسافة بسيطة لتبدو منفصلة وزجاجية انسيابية */
+    }
+
+    .nav-item {
+        font-size: 1.1rem;
+        padding: 10px 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px dashed rgba(224, 86, 160, 0.1);
+    }
+
+    .nav-item:last-of-type {
+        border-bottom: none;
+    }
+
+    .btn-wards {
+        width: 100%;
+        padding: 13px;
+        font-size: 1rem;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    /* سكشن الهيرو والتعريف والـ Modal للموبايل */
+    .hero {
+        padding: 50px 10px 35px;
+    }
+
+    .hero h1 {
+        font-size: 1.9rem;
+        line-height: 1.4;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+
+    .btn-main {
+        padding: 12px 30px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 320px;
+        text-align: center;
+    }
+
+    .founder-box {
+        padding: 35px 20px;
+        border-radius: 20px;
+    }
+
+    .founder-box h2 {
+        font-size: 1.6rem;
+    }
+
+    .founder-box p {
+        font-size: 1.05rem;
+        text-align: justify;
+    }
+
+    .modal-window {
+        padding: 25px 15px;
+        border-radius: 20px;
+    }
+
+    .modal-title {
+        font-size: 1.35rem;
+        margin-bottom: 20px;
+    }
+
+    .days-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .day-card {
+        font-size: 0.85rem;
+        padding: 12px 6px;
+        border-radius: 12px;
+    }
+
+    .day-content-box {
+        padding: 18px 12px;
+    }
+
+    .day-content-title {
+        font-size: 1.15rem;
+    }
+
+    .task-link-item {
+        padding: 14px 12px;
+        border-radius: 12px;
+    }
+
+    .task-link-item h5 {
+        font-size: 1rem;
+    }
+
+    .task-link-item p {
+        font-size: 0.85rem;
+    }
+
+    .tasks-title {
+        font-size: 1.7rem;
+        margin-bottom: 30px;
+    }
+
+    .task-card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+
+    .site-footer {
+        padding: 40px 0 20px;
+        margin-top: 50px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-brand p {
+        margin: 0 auto;
+        font-size: 1rem;
+    }
+
+    .footer-links h5::after {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .social-buttons {
+        justify-content: center;
+    }
+
+    .social-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .days-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* تنسيق قسم التعريف المطوّر */
+.founder-wrapper {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    /* الصورة على اليمين والنص على اليسار بشكل متزن */
+    gap: 40px;
+    align-items: center;
+    /* [تعديل زجاجي للمعة] */
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-soft);
+    border-right: 6px solid var(--accent-pink);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(112, 20, 42, 0.02);
+}
+
+.founder-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* تأثير الإطار حول صورتكِ بالمكتبة */
+.founder-image-card {
+    /* [تعديل زجاجي للإطار البارز] ليعطي إضاءة وانعكاس حقيقي للصورة */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-soft);
+    padding: 10px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(112, 20, 42, 0.03);
+    transition: transform 0.3s ease;
+}
+
+.founder-image-card:hover {
+    transform: scale(1.02);
+}
+
+.founder-img {
+    width: 100%;
+    max-width: 340px;
+    /* حجم مثالي ومناسب جداً داخل المربع */
+    height: auto;
+    border-radius: 16px;
+    display: block;
+    object-fit: cover;
+}
+
+.founder-content {
+    text-align: right;
+}
+
+.founder-content h2 {
+    color: #70142a;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.founder-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+}
+
+/* توافق شاشات الموبايل لسكشن الـ founder */
+@media (max-width: 991px) {
+    .founder-wrapper {
+        grid-template-columns: 1fr;
+        /* عمود واحد للموبايل */
+        padding: 25px 20px;
+        gap: 25px;
+    }
+
+    .founder-image-container {
+        order: 1;
+        /* الصورة تظهر في الأعلى أولاً */
+    }
+
+    .founder-content {
+        order: 2;
+        /* النص يظهر أسفل الصورة */
+        text-align: center;
+    }
+
+    .founder-img {
+        max-width: 280px;
+        /* حجم أصغر يناسب الموبايل */
+    }
+}
+
+/* تنسيق الأزرار المشترك */
+.founder-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.founder-socials .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    /* [تعديل زجاجي] أزرار السوشيال للتعريف زجاجية ولامعة تماماً */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    text-decoration: none;
+    color: #3a2227;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.founder-socials .social-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #70142a;
+    /* يتلون بلون الهوية العنابي تلقائياً */
+    transition: fill 0.3s ease;
+}
+
+.founder-socials .social-btn:hover {
+    color: white !important;
+    transform: translateY(-3px);
+}
+
+.founder-socials .social-btn:hover svg {
+    fill: white;
+}
+
+/* تأثير التليجرام */
+.founder-socials .social-btn.telegram:hover {
+    background: #26A5E4;
+    border-color: #26A5E4;
+    box-shadow: 0 5px 15px rgba(38, 165, 228, 0.3);
+}
+
+/* تأثير رقم الواتساب */
+.founder-socials .social-btn.whatsapp:hover {
+    background: #25D366;
+    border-color: #25D366;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* تأثير جروب الواتساب الأخضر بلون داكن ومميز أو نفس درجة الواتساب الساطعة */
+.founder-socials .social-btn.whatsapp-group:hover {
+    background: #128C7E;
+    /* درجة أخضر فخمة ومختلفة قليلاً لتمييز الجروب عن رقم الهاتف */
+    border-color: #128C7E;
+    box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+}
+
+/* تأثير الفيسبوك */
+.founder-socials .social-btn.facebook:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+}
+
+@media (max-width: 768px) {
+    .founder-socials .social-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+/* زر الواتساب العائم والمثبت أسفل الشاشة */
+.whatsapp-floating {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    /* باليسار لعدم تغطية أي عناصر مهمة باليمين */
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    animation: whatsappPulse 2s infinite;
+}
+
+.whatsapp-floating:hover {
+    transform: scale(1.1) translateY(-5px);
+    background-color: #20ba5a;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-floating svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+}
+
+@keyframes whatsappPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* لتوافقه مع شاشات الموبايل */
+@media (max-width: 768px) {
+    .whatsapp-floating {
+        bottom: 20px;
+        left: 20px;
+        width: 55px;
+        height: 55px;
+    }
+
+    .founder-socials .social-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+.founder-socials .social-btn.facebook:hover {
+    background: #1877F2;
+    color: white;
+    border-color: #1877F2;
+    box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+    transform: translateY(-3px);
+}
+
+/* تنسيق صف الأيقونات أسفل النص بالفوتر */
+.footer-socials-inline {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* التنسيق الدائري الزجاجي للأيقونة */
+.f-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    /* [تعديل زجاجي] جعل أيقونات الفوتر الدائرية تعكس الضوء والضبابية بسلاسة */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--border-soft);
+    border-radius: 50%;
+    /* شكل دائري كامل */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* حجم ولون الأيقونة الافتراضي داخل الدائرة */
+.f-social-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: #70142a;
+    /* لون الهوية العنابي الفخم */
+    transition: fill 0.3s ease;
+}
+
+/* التأثيرات الحركية عند تمرير الماوس فوق الدوائر */
+.f-social-btn:hover {
+    transform: translateY(-3px);
+}
+
+.f-social-btn:hover svg {
+    fill: #ffffff;
+    /* تتحول الأيقونة للون الأبيض */
+}
+
+/* ألوان الخلفيات لكل شبكة عند عمل الـ Hover */
+.f-telegram:hover {
+    background-color: #26A5E4;
+    border-color: #26A5E4;
+    box-shadow: 0 5px 15px rgba(38, 165, 228, 0.3);
+}
+
+.f-whatsapp:hover {
+    background-color: #25D366;
+    border-color: #25D366;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.f-whatsapp-group:hover {
+    background-color: #128C7E;
+    border-color: #128C7E;
+    box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+}
+
+.f-facebook:hover {
+    background-color: #1877F2;
+    border-color: #1877F2;
+    box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+}
+
+/* لضمان التنسيق التلقائي في وسط الشاشة عند العرض على الموبايل */
+@media (max-width: 768px) {
+    .footer-socials-inline {
+        justify-content: center;
+    }
+}
