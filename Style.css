@@ -40,8 +40,48 @@ body {
     color: var(--text-dark);
     line-height: 1.8;
     -webkit-tap-highlight-color: transparent;
+
+    
 }
 
+
+
+body {
+    /* الخلفية الأساسية للموقع */
+    background-color: #fcf5f7;
+    
+    /* هنا سحر الورود الزرقاء الموزعة في كل مكان */
+    background-image: 
+        radial-gradient(circle at 20% 20%, #436075 2px, transparent 2px),
+        radial-gradient(circle at 80% 80%, #436075 2px, transparent 2px),
+        radial-gradient(circle at 50% 50%, #436075 1.5px, transparent 1.5px),
+        radial-gradient(circle at 10% 90%, #436075 2px, transparent 2px),
+        radial-gradient(circle at 90% 10%, #436075 2px, transparent 2px);
+    
+    /* هذا الحجم يحدد المسافة بين الوردة والأخرى */
+    background-size: 100px 100px;
+    
+    /* الشفافية للورود */
+    opacity: 1; /* يمكنكِ التحكم في وضوحها من هنا */
+}
+
+/* إذا كنتِ تريدين إضافة الورد 🌸 بجانب النقاط الزرقاء لتملأ الصفحة: */
+body::before {
+    content: "🌸";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    color: #436075;
+    opacity: 0.05; /* شفافية الوردة 🌸 لتكون خلفية هادئة */
+    font-size: 30px;
+    /* هذا التكرار يملأ الصفحة بالكامل */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="60">🌸</text></svg>');
+    background-size: 80px 80px;
+    pointer-events: none;
+}
 .container {
     width: 100%;
     max-width: 1140px;
@@ -642,10 +682,10 @@ a.task-link-item:hover {
     ----------------------------------------- */
 .site-footer {
     /* [تعديل اللمعة والزجاج] جعل الفوتر مبهر كقطعة زجاجية واحدة تتداخل مع تدريج الصفحة */
-    background: rgba(255, 255, 255, 0.2);
+    background:#436075 ;
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    border-top: 1px solid var(--border-soft);
+   border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 50px 0 20px;
     margin-top: 70px;
     box-shadow: 0 -10px 30px rgba(112, 20, 42, 0.02);
@@ -660,13 +700,13 @@ a.task-link-item:hover {
 
 .footer-brand h4 {
     font-size: 1.8rem;
-    color: var(--brand-maroon);
+   color: #ffffff;
     margin-bottom: 12px;
     font-weight: 700;
 }
 
 .footer-brand p {
-    color: var(--text-muted);
+color: #e0eaf2;
     font-size: 1.05rem;
     max-width: 450px;
     text-align: justify;
@@ -674,7 +714,7 @@ a.task-link-item:hover {
 
 .footer-links h5 {
     font-size: 1.2rem;
-    color: var(--brand-maroon);
+    color: #ffffff;
     margin-bottom: 18px;
     font-weight: 700;
     position: relative;
@@ -682,6 +722,7 @@ a.task-link-item:hover {
 }
 
 .footer-links h5::after {
+    color: #d1e0eb;
     content: '';
     position: absolute;
     bottom: 0;
@@ -701,14 +742,14 @@ a.task-link-item:hover {
 
 .footer-links ul li a {
     text-decoration: none;
-    color: var(--text-dark);
+    color: #d1e0eb;
     font-weight: 500;
     transition: all 0.25s ease;
     display: inline-block;
 }
 
 .footer-links ul li a:hover {
-    color: var(--accent-pink);
+    color: #ffffff;
     transform: translateX(-5px);
 }
 
@@ -756,12 +797,12 @@ a.task-link-item:hover {
     text-align: center;
     border-top: 1px dashed rgba(224, 86, 160, 0.15);
     padding-top: 20px;
-    color: var(--text-muted);
+color: #b9cde3;
     font-size: 0.9rem;
 }
 
 .footer-bottom strong {
-    color: var(--brand-maroon);
+   color: #ffffff;
 }
 
 /* -----------------------------------------
