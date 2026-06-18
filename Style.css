@@ -44,43 +44,36 @@ body {
     
 }
 
-
-
+/* ضبط خلفية الصورة لتظهر بوضوح */
 body {
-    /* الخلفية الأساسية للموقع */
-    background-color: #fcf5f7;
-    
-    /* هنا سحر الورود الزرقاء الموزعة في كل مكان */
-    background-image: 
-        radial-gradient(circle at 20% 20%, #436075 2px, transparent 2px),
-        radial-gradient(circle at 80% 80%, #436075 2px, transparent 2px),
-        radial-gradient(circle at 50% 50%, #436075 1.5px, transparent 1.5px),
-        radial-gradient(circle at 10% 90%, #436075 2px, transparent 2px),
-        radial-gradient(circle at 90% 10%, #436075 2px, transparent 2px);
-    
-    /* هذا الحجم يحدد المسافة بين الوردة والأخرى */
-    background-size: 100px 100px;
-    
-    /* الشفافية للورود */
-    opacity: 1; /* يمكنكِ التحكم في وضوحها من هنا */
+    font-family: 'Tajawal', sans-serif;
+    background-image: url('imgs/flowers-bg.jpg');
+    background-size: cover;      /* لتغطية كامل الشاشة */
+    background-position: center; /* لتوسيط الورد */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: var(--text-dark);
+    line-height: 1.8;
 }
 
-/* إذا كنتِ تريدين إضافة الورد 🌸 بجانب النقاط الزرقاء لتملأ الصفحة: */
+/* طبقة خفيفة جداً لضمان وضوح النص فوق الورد */
 body::before {
-    content: "🌸";
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    /* هنا جعلنا اللون فاتح جداً (0.3) لتظهر الورود بوضوح أكبر تحت الزجاج */
+    background: rgba(255, 255, 255, 0.3); 
     z-index: -1;
-    color: #436075;
-    opacity: 0.05; /* شفافية الوردة 🌸 لتكون خلفية هادئة */
-    font-size: 30px;
-    /* هذا التكرار يملأ الصفحة بالكامل */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="60">🌸</text></svg>');
-    background-size: 80px 80px;
-    pointer-events: none;
+}
+
+/* تعديل شفافية الكروت الزجاجية لتسمح بمرور لون الورود */
+.card, .hero-image-card, .founder-wrapper, .modal-window, .day-card, .task-link-item, .task-card {
+    /* زيادة الشفافية هنا تسمح بظهور تفاصيل الورد خلف الزجاج */
+    background: rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
 .container {
     width: 100%;
