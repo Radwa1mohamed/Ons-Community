@@ -485,4 +485,19 @@
             const contentBox = document.getElementById('dayContentBox');
             contentBox.innerHTML = daysData[dayNumber] || `<h4 class="day-content-title">قريباً..</h4>`;
         }
+
+
+        // هذا الكود يجعل الحركة تستمر مهما حدث
+document.addEventListener("DOMContentLoaded", function() {
+    const track = document.getElementById('feedbackTrack');
+    
+    // إيقاف الحركة عند الماوس (اختياري)
+    track.addEventListener('mouseenter', () => {
+        track.style.animationPlayState = 'paused';
+    });
+    
+    track.addEventListener('mouseleave', () => {
+        track.style.animationPlayState = 'running';
+    });
+});
    

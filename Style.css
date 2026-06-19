@@ -42,8 +42,13 @@ body {
     -webkit-tap-highlight-color: transparent;
 
     
+
 }
 
+html, body {
+    overflow-x: hidden; /* يمنع ظهور شريط التمرير الأفقي المزعج في الموبايل */
+    width: 100%;
+}
 /* ضبط خلفية الصورة لتظهر بوضوح */
 body {
     font-family: 'Tajawal', sans-serif;
@@ -1379,4 +1384,244 @@ color: #b9cde3;
     .footer-socials-inline {
         justify-content: center;
     }
+}
+
+
+
+
+
+/* البلورة الكبيرة الشاملة */
+.mega-glass-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 40px;
+    padding: 50px;
+    max-width: 1000px;
+    margin: 50px auto;
+    color: #436075;
+}
+
+.problem-solution h2 { color: #70142a; }
+
+.journey-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* الصورة في جهة، والشرايح في جهة */
+    gap: 30px;
+    align-items: center;
+}
+
+.journey-slides {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.solution-highlight {
+    background: rgba(112, 20, 42, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    border-right: 4px solid #70142a;
+    margin: 20px 0;
+}
+
+.journey-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.detail-box {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* تنسيق منطقة الأزرار */
+.cta-area {
+    display: flex; /* لترتيب الأزرار بجانب بعضها */
+    justify-content: center; /* توسيط الأزرار في المنتصف */
+    gap: 20px; /* مسافة بين الزرين */
+    margin-top: 40px; /* مسافة من فوق عن المربعات */
+    flex-wrap: wrap; /* لضمان التجاوب على الموبايل */
+}
+
+/* تنسيق الزر الرئيسي */
+.btn-main {
+    display: inline-block;
+    color: white !important;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    text-align: center;
+}
+
+/* تنسيق زر الإعلان (شكل مختلف قليلاً) */
+.secondary-btn {
+    background: transparent;
+   
+}
+
+.btn-main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(112, 20, 42, 0.3);
+}
+
+/* تحسين التصميم للموبايل */
+@media (max-width: 768px) {
+    .mega-glass-card {
+        padding: 20px; /* تقليل المساحات الداخلية لتوفير مساحة للنصوص */
+        margin: 20px 10px; /* تقليل الهوامش الخارجية ليأخذ مساحة أكبر من الشاشة */
+        border-radius: 25px; /* تصغير الزوايا لتناسب الشاشات الصغيرة */
+    }
+
+    .problem-solution h2 {
+        font-size: 1.4rem; /* تصغير العنوان ليكون مناسباً لعرض الموبايل */
+    }
+
+    .journey-details {
+        grid-template-columns: 1fr; /* تحويل المربعات من عمودين إلى عمود واحد فوق بعض */
+        gap: 15px; /* تقليل المسافة بين المربعات */
+    }
+
+    .cta-area {
+        flex-direction: column; /* جعل الأزرار فوق بعضها بدلاً من بجانب بعض */
+        gap: 10px;
+    }
+    
+    .btn-main {
+        width: 100%; /* جعل الزر يأخذ عرض الشاشة بالكامل ليسهل الضغط عليه */
+        padding: 12px 20px;
+    }
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 300px; /* النص يأخذ معظم المساحة، والصورة تأخذ 300px */
+    gap: 30px;
+    align-items: center; /* توسيط العناصر رأسياً */
+}
+
+.quran-img {
+
+     
+
+    align-items: center;
+    width: 50%;
+    border-radius: 30px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.glass-slide {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.glass-slide:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+
+
+/* تعديل للموبايل ليصبح التصميم فوق بعضه */
+@media (max-width: 768px) {
+    .content-wrapper {
+        grid-template-columns: 1fr; /* الصورة تصبح فوق النص في الموبايل */
+    }
+    .image-content {
+        order: -1; /* تجعل الصورة تظهر في الأعلى أولاً في الموبايل */
+        margin-bottom: 20px;
+    }
+
+    .journey-layout {
+        grid-template-columns: 1fr; /* في الموبايل يصبحان فوق بعض */
+    }
+}
+
+
+
+
+.feedback-slider {
+    width: 100%;
+    overflow: hidden; /* إخفاء الصور التي تخرج عن الإطار */
+    padding: 20px 0;
+}
+.feedback-card {
+    /* تصغير الحجم الكلي للحاوية الزجاجية */
+    min-width: 220px;  /* تقليل العرض قليلاً */
+    height: auto;      /* تغيير الطول ليناسب حجم الصورة تلقائياً بدلاً من طول ثابت */
+    
+    /* تقليل الفراغات الداخلية (البلورة) */
+    padding: 8px;      /* مساحة صغيرة جداً حول الصورة */
+    
+    /* جعل الزوايا أكثر تماشياً مع حجم الصورة */
+    border-radius: 15px; 
+    
+    /* التنسيق الزجاجي */
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    
+    /* ضبط الصورة بداخلها */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedback-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* جعل زوايا الصورة متماشية مع البلورة */
+}
+
+.feedback-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll 20s linear infinite; /* الحركة الديناميكية */
+}
+
+
+
+.feedback-card img {
+    max-width: 100%;
+    border-radius: 15px;
+}
+
+
+/* كود الحركة (الأنيميشن) */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+
+
+/* تنسيق العنوان ليصبح في المنتصف وعليه بلورة */
+.feedback-section h2 {
+    text-align: center;         /* لجعل النص في منتصف الصفحة */
+    margin: 40px auto;          /* مسافة فوق وتحت وتوسيط */
+    display: inline-block;      /* سر التوسيط الدقيق واحتواء الكلام فقط */
+    padding: 15px 30px;         /* مساحة مريحة حول الكلام */
+    
+    /* البلورة (الزجاج) */
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50px;        /* شكل دائري انسيابي */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    color: #70142a;             /* اللون العنابي الخاص بكِ */
+}
+
+/* لضمان أن العنوان ككل في منتصف الشاشة */
+.feedback-section {
+    text-align: center;
 }
